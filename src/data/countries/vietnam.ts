@@ -312,8 +312,8 @@ export const vietnamData = {
     },
     {
       question: "Do I need a visa for Vietnam?",
-      answer: "Most visitors will need to obtain a visa or e-visa before travelling to Vietnam. Citizens of certain countries are eligible for visa-free stays, depending on nationality and length of stay. For U.S. travellers, getting the required e-visa is a simple, straightforward online process completed before arrival. Always check the latest entry requirements before booking.",
-      emphasis: "For U.S. travellers, getting the required e-visa is a simple, straightforward online process completed before arrival.",
+      answer: "Most visitors will need to obtain a visa or e-visa before travelling to Vietnam. Citizens of certain countries are eligible for visa-free stays, depending on nationality and length of stay. For U.S. travellers, getting the required e-visa is a simple, straightforward online process. It should be applied for at least two weeks before arrival. Always check the latest entry requirements before booking.",
+      emphasis: "For U.S. travellers, getting the required e-visa is a simple, straightforward online process. It should be applied for at least two weeks before arrival.",
     },
   ],
 };
