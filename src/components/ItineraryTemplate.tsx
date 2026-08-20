@@ -348,10 +348,12 @@ const TripHighlights = memo(({ data }: { data: CountryData }) => {
           {/* Desktop: Title with arrows in same row */}
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-semibold text-foreground">Trip Highlights</h3>
-            <div className="flex gap-2">
-              <CarouselPrevious className="relative inset-auto translate-x-0 translate-y-0" />
-              <CarouselNext className="relative inset-auto translate-x-0 translate-y-0" />
-            </div>
+            {highlights.length > 1 && (
+              <div className="flex gap-2">
+                <CarouselPrevious className="relative inset-auto translate-x-0 translate-y-0" />
+                <CarouselNext className="relative inset-auto translate-x-0 translate-y-0" />
+              </div>
+            )}
           </div>
 
           <CarouselContent>

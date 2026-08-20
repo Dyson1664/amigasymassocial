@@ -2,7 +2,6 @@ import vietnamHero from "@/assets/vn/vietnam-hero.webp";
 import vnBasketBoat from "@/assets/vn/vn-basketboat.webp";
 import haLongBayCruise2 from "@/assets/vn/ha long bay ruise-2.jpg";
 import vnBikeRide from "@/assets/vn/vn-bike-ride.webp";
-import vnHalongBay from "@/assets/vn/vn-halongbay.webp";
 import vnHanoi1 from "@/assets/vn/vn-hanoi1.webp";
 import vnHanoi2 from "@/assets/vn/vn-Hanoi2.webp";
 import vnHanoiTrainStreet from "@/assets/vn/train street.webp";
@@ -16,6 +15,7 @@ import hoiAnMoments3 from "@/assets/vn/hoi-an-moments-3.jpg";
 import day7HoiAnImage from "@/assets/vn/day 7 hoi an image.jpg";
 import haLongBay2 from "@/assets/vn/ha-long-bay-2.jpg";
 import vietnamVideo from "@/assets/vn/vietnam-video.mp4";
+import hoiAnVideo from "@/assets/vn/hoi-an.mp4";
 import hanoiHotel2 from "@/assets/vn/hotels/hanoi-hotel-2.webp";
 import hanoiHotel3 from "@/assets/vn/hotels/hanoi-hotel-3.png";
 import cruiseRoom1 from "@/assets/vn/hotels/cruise-room.webp";
@@ -66,19 +66,10 @@ export const vietnamData = {
   aboutImages: [vietnamHero, vietnamHero],
   highlights: [
     {
-      title: "Ha Long Bay Cruise",
-      description: "Sail through Ha Long Bay on an overnight cruise surrounded by emerald water and limestone karsts.",
-      image: vnHalongBay,
-    },
-    {
       title: "Hoi An",
       description: "Explore lantern-lit streets, riverside cafes, and the charm of Hoi An's old town.",
       image: vnHoian,
-    },
-    {
-      title: "Countryside Ride",
-      description: "Cycle through rice fields and village roads before hands-on local food experiences.",
-      image: vnBikeRide,
+      video: hoiAnVideo,
     },
   ],
   accommodations: [
