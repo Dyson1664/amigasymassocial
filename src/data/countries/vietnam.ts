@@ -2,10 +2,11 @@ import vietnamHero from "@/assets/vn/vietnam-hero.webp";
 import vnBasketBoat from "@/assets/vn/vn-basketboat.webp";
 import haLongBayCruise2 from "@/assets/vn/ha long bay ruise-2.jpg";
 import vnBikeRide from "@/assets/vn/vn-bike-ride.webp";
+import vnHalongBay from "@/assets/vn/vn-halongbay.webp";
 import vnHanoi1 from "@/assets/vn/vn-hanoi1.webp";
 import vnHanoi2 from "@/assets/vn/vn-Hanoi2.webp";
 import vnHanoiTrainStreet from "@/assets/vn/train street.webp";
-import vnHoian from "@/assets/vn/vn-hoian.webp";
+import tripHighlight2 from "@/assets/vn/trip-highlight-2.webp";
 import vnLanternDesktop from "@/assets/vn/vn-lantern-desktop.webp";
 import vnLantern2 from "@/assets/vn/vn-lantern2.webp";
 import releasingLanterns from "@/assets/vn/releasing lanters.jpg";
@@ -15,7 +16,6 @@ import hoiAnMoments3 from "@/assets/vn/hoi-an-moments-3.jpg";
 import day7HoiAnImage from "@/assets/vn/day 7 hoi an image.jpg";
 import haLongBay2 from "@/assets/vn/ha-long-bay-2.jpg";
 import vietnamVideo from "@/assets/vn/vietnam-video.mp4";
-import hoiAnVideo from "@/assets/vn/hoi-an.mp4";
 import hanoiHotel2 from "@/assets/vn/hotels/hanoi-hotel-2.webp";
 import hanoiHotel3 from "@/assets/vn/hotels/hanoi-hotel-3.png";
 import cruiseRoom1 from "@/assets/vn/hotels/cruise-room.webp";
@@ -66,10 +66,19 @@ export const vietnamData = {
   aboutImages: [vietnamHero, vietnamHero],
   highlights: [
     {
+      title: "Ha Long Bay Cruise",
+      description: "Sail through Ha Long Bay on an overnight cruise surrounded by emerald water and limestone karsts.",
+      image: vnHalongBay,
+    },
+    {
       title: "Hoi An",
       description: "Explore lantern-lit streets, riverside cafes, and the charm of Hoi An's old town.",
-      image: vnHoian,
-      video: hoiAnVideo,
+      image: tripHighlight2,
+    },
+    {
+      title: "Countryside Ride",
+      description: "Cycle through rice fields and village roads before hands-on local food experiences.",
+      image: vnBikeRide,
     },
   ],
   accommodations: [
@@ -276,8 +285,8 @@ export const vietnamData = {
       featured: true,
       payments: [
         { label: "Deposit at booking", amount: "$400" },
-        { label: "Payment 1 due October 15, 2026", amount: "$700" },
-        { label: "Final payment due December 15, 2026", amount: "$700" },
+        { label: "Payment 1 due November 3rd, 2026", amount: "$700" },
+        { label: "Final payment due January 18th, 2027", amount: "$700" },
       ],
       note: "Single room: add the $465 supplement to payment 1, making that payment $1,165 and the trip total $2,265.",
     },
@@ -286,8 +295,8 @@ export const vietnamData = {
       price: "$1,950",
       payments: [
         { label: "Deposit at booking", amount: "$400" },
-        { label: "Payment 1 due October 15, 2026", amount: "$775" },
-        { label: "Final payment due December 15, 2026", amount: "$775" },
+        { label: "Payment 1 due November 3rd, 2026", amount: "$775" },
+        { label: "Final payment due January 18th, 2027", amount: "$775" },
       ],
       note: "Single room: add the $465 supplement to payment 1, making that payment $1,240 and the trip total $2,415.",
     },

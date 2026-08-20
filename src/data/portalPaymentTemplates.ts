@@ -52,8 +52,8 @@ const depositInstallment: PaymentInstallmentTemplate = {
 };
 
 const balanceDueDates = [
-  "2026-10-15",
-  "2026-12-15",
+  "2026-11-03",
+  "2027-01-18",
 ] as const;
 
 const balances = (
