@@ -11,8 +11,9 @@ const VietnamDesktopHero = () => {
       <div className="mx-auto w-full max-w-[1420px] md:w-[94%] md:px-6 lg:w-[92%] lg:px-12 xl:w-[90%]">
         <div className="mb-3 flex items-start justify-between gap-4">
           <div>
-            <h1 className="font-playfair text-3xl font-semibold leading-none text-[#0fc2bf] lg:text-4xl">
-              {vietnamData.title}
+            <h1 className="whitespace-nowrap font-playfair text-2xl font-semibold leading-none lg:text-3xl xl:text-4xl">
+              <span className="text-[#0fc2bf]">{vietnamData.desktopTitleKicker}</span>{" "}
+              <span className="text-[#0fc2bf]">{vietnamData.title}</span>
             </h1>
 
             {vietnamData.tags.length > 0 && (
@@ -89,7 +90,7 @@ const VietnamDesktopHero = () => {
           />
           <img
             src={vietnamData.desktopTopMiddleImage}
-            alt="Vietnam group travel moment"
+            alt="Amigas Y Mas Social group holding their flag"
             className="col-span-5 h-full w-full object-cover"
           />
           <img
@@ -99,18 +100,18 @@ const VietnamDesktopHero = () => {
           />
           <img
             src={vietnamData.desktopBottomLeftImage}
-            alt="Hoi An lantern street"
+            alt="Traditional basket boat experience in Hoi An"
             className="col-span-3 h-full w-full object-cover"
           />
           <img
             src={vietnamData.desktopBottomMiddleImage}
-            alt="Cycling through Vietnam countryside"
+            alt="Sally surrounded by lanterns in Hoi An"
             className="col-span-3 h-full w-full object-cover"
             style={{ objectPosition: vietnamData.desktopBottomMiddleObjectPosition }}
           />
           <img
             src={vietnamData.desktopBottomRightImage}
-            alt="Basket boat ride in Vietnam"
+            alt="Colorful Hoi An street corner during the day"
             className="col-span-3 h-full w-full object-cover"
             style={{ objectPosition: vietnamData.desktopBottomRightObjectPosition }}
           />

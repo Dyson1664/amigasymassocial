@@ -27,15 +27,6 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-6 text-primary">Help</h4>
             <div className="space-y-3 text-sm">
-              <a
-                href="https://www.imaginebeyondtravel.com/#/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:text-primary transition-colors"
-              >
-                Main Website
-              </a>
-
               <Link
                 to="/about"
                 className="block hover:text-primary transition-colors"
@@ -84,15 +75,6 @@ const Footer = () => {
             >
               Terms &amp; Conditions
             </Link>
-            <span>•</span>
-            <a
-              href="https://www.imaginebeyondtravel.com/#/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </a>
           </div>
         </div>
       </div>

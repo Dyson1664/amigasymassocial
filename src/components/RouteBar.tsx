@@ -1,9 +1,7 @@
 import React from "react";
 import { Route as RouteIcon, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
-// Colors cycle across stops
-const ROUTE_COLORS = ["#06b6d4", "#f97316", "#8b5cf6", "#22c55e", "#eab308", "#ef4444"];
-const getColor = (i: number) => ROUTE_COLORS[i % ROUTE_COLORS.length];
+const ROUTE_COLOR = "#0FC2BF";
 
 // --- Mobile: horizontal, draggable scroller (no arrows) ---
 function MobileScroller({ stops }: { stops: string[] }) {
@@ -72,25 +70,23 @@ function MobileScroller({ stops }: { stops: string[] }) {
       >
         <div className="flex items-center flex-nowrap gap-1.5 py-0.5">
           {stops.map((stop, i) => {
-            const color = getColor(i);
-            const nextColor = getColor(i + 1);
             const isLast = i === stops.length - 1;
 
             return (
               <div key={stop + i} className="flex items-center flex-none">
                 <span
-                  className="mr-1.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold text-black"
-                  style={{ backgroundColor: color }}
+                  className="mr-1.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold text-white"
+                  style={{ backgroundColor: ROUTE_COLOR }}
                   title={stop}
                 >
-                  <MapPin className="h-4 w-4 text-black opacity-90" />
+                  <MapPin className="h-4 w-4 text-white/90" />
                   <span className="truncate max-w-[180px]">{stop}</span>
                 </span>
 
                 {!isLast && (
                   <span
                     className="mx-0.5 h-0.5 w-4 flex-none rounded"
-                    style={{ background: `linear-gradient(to right, ${color}, ${nextColor})` }}
+                    style={{ backgroundColor: ROUTE_COLOR }}
                   />
                 )}
               </div>
@@ -241,25 +237,23 @@ function DesktopScroller({ stops, slug }: { stops: string[]; slug?: string }) {
       <div ref={trackRef} className="no-scrollbar overflow-x-auto" style={{ scrollBehavior: "smooth" }}>
         <div className="flex items-center flex-nowrap gap-1.5 py-0.5">
           {stops.map((stop, i) => {
-            const color = getColor(i);
-            const nextColor = getColor(i + 1);
             const isLast = i === stops.length - 1;
 
             return (
               <div key={stop + i} className="flex items-center flex-none">
                 <span
-                  className={`mr-1.5 inline-flex items-center rounded-full font-semibold text-black ${presets.chip}`}
-                  style={{ backgroundColor: color }}
+                  className={`mr-1.5 inline-flex items-center rounded-full font-semibold text-white ${presets.chip}`}
+                  style={{ backgroundColor: ROUTE_COLOR }}
                   title={stop}
                 >
-                  <MapPin className={`${presets.icon} text-black/90`} />
+                  <MapPin className={`${presets.icon} text-white/90`} />
                   <span className={`truncate ${presets.labelMax}`}>{stop}</span>
                 </span>
 
                 {!isLast && (
                   <span
                     className={`mx-0.5 h-0.5 ${presets.connectorW} flex-none rounded`}
-                    style={{ background: `linear-gradient(to right, ${color}, ${nextColor})` }}
+                    style={{ backgroundColor: ROUTE_COLOR }}
                   />
                 )}
               </div>

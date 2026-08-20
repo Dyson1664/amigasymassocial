@@ -75,6 +75,7 @@ interface PaymentPlan {
 interface FAQ {
   question: string;
   answer: string;
+  emphasis?: string;
 }
 
 interface TripHighlight {
@@ -96,6 +97,9 @@ interface CountryData {
   id: string;
   slug?: string;
   title: string;
+  mobileTitle?: string;
+  mobileTitleKicker?: string;
+  desktopTitleKicker?: string;
   subtitle: string;
   location: string;
   duration: string;
@@ -104,6 +108,7 @@ interface CountryData {
   price?: string;
   priceOriginal?: string;
   priceNote?: string;
+  mobilePriceNote?: string;
   ctaLabel?: string;
   soldOut?: boolean;
   startDate?: string;
@@ -724,7 +729,10 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
                  px-4 md:px-6 py-8"
     >
       {/* Mobile: Just title */}
-      <h2 className="md:hidden text-2xl font-bold text-primary mb-4">Where We Stay</h2>
+      <h2 className="md:hidden text-2xl font-bold text-primary mb-4">
+        Where We Stay
+        <span className="ml-2 text-sm font-normal text-muted-foreground">(or similar)</span>
+      </h2>
 
       <div className="relative">
         {/* Desktop */}
@@ -732,7 +740,10 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
           // If everything fits, avoid carousel entirely (prevents “missing” content + no arrows)
           <div className="hidden md:block">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-primary">Where We Stay</h2>
+              <h2 className="text-2xl font-bold text-primary">
+                Where We Stay
+                <span className="ml-2 text-sm font-normal text-muted-foreground">(or similar)</span>
+              </h2>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -803,7 +814,10 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
           >
             {/* Desktop: Title with arrows in same row */}
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-primary">Where We Stay</h2>
+              <h2 className="text-2xl font-bold text-primary">
+                Where We Stay
+                <span className="ml-2 text-sm font-normal text-muted-foreground">(or similar)</span>
+              </h2>
               <div className="flex gap-2">
                 <CarouselPrevious className="relative inset-auto translate-x-0 translate-y-0" />
                 <CarouselNext className="relative inset-auto translate-x-0 translate-y-0" />
@@ -1249,7 +1263,15 @@ const FAQSection = memo(
               </AccordionTrigger>
               <AccordionContent className="px-0 md:px-6 pb-4">
                 <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {faq.answer}
+                  {faq.emphasis && faq.answer.includes(faq.emphasis) ? (
+                    <>
+                      {faq.answer.split(faq.emphasis)[0]}
+                      <strong className="font-semibold text-primary">{faq.emphasis}</strong>
+                      {faq.answer.split(faq.emphasis)[1]}
+                    </>
+                  ) : (
+                    faq.answer
+                  )}
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -1503,25 +1525,31 @@ export const ItineraryTemplate = memo(
               fetchpriority="high"
               decoding="async"
             />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
             {/* Tour Start Date Badge - Mobile Only */}
             {(data.slug === "india-journey" ||
               data.slug === "sri-lanka" ||
-              data.slug === "philippines" ||
-              data.slug === "vietnam") && (
+              data.slug === "philippines") && (
               <div className="absolute top-4 right-4 z-10">
-                <div className="bg-primary backdrop-blur-md border border-primary rounded-lg px-3 py-2 shadow-lg">
-                  <p className="text-sm font-semibold text-white whitespace-nowrap">
+                <div className="rounded-lg border border-primary bg-primary px-3 py-2 shadow-lg backdrop-blur-md">
+                  <p className="whitespace-nowrap text-sm font-semibold text-white">
                     {data.slug === "india-journey" && "Tour starts Feb 27th"}
                     {data.slug === "sri-lanka" && "Tour starts April 19th"}
                     {data.slug === "philippines" && "Tour starts May 4th"}
-                    {data.slug === "vietnam" && `Tour starts ${data.startDate}`}
                   </p>
                 </div>
               </div>
             )}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="absolute bottom-8 left-1/2 z-10 w-full -translate-x-1/2 px-4">
               <div className="text-center text-white">
-                <h1 className="text-3xl font-bold mb-2">{data.title}</h1>
+                <h1 className={`${data.mobileTitleKicker ? "mb-1" : "mb-2"} text-[26px] font-bold leading-tight drop-shadow-md`}>
+                  {data.mobileTitle || data.title}
+                </h1>
+                {data.mobileTitleKicker && (
+                  <p className="mb-2 text-lg font-semibold uppercase tracking-[0.08em] text-white/95 drop-shadow-md">
+                    {data.mobileTitleKicker}
+                  </p>
+                )}
                 <div className="flex items-center justify-center gap-2 text-base">
                   <MapPin className="w-4 h-4" />
                   <span>
@@ -1577,7 +1605,10 @@ export const ItineraryTemplate = memo(
               </div>
               <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
                 <div className="text-center text-white">
-                  <h1 className="text-4xl lg:text-5xl font-bold mb-3">{data.title}</h1>
+                  <h1 className="mb-3 whitespace-nowrap text-4xl font-bold lg:text-5xl">
+                    {data.desktopTitleKicker && <>{data.desktopTitleKicker}{" "}</>}
+                    {data.title}
+                  </h1>
                   <div className="flex items-center justify-center gap-2 text-lg">
                     <MapPin className="w-5 h-5" />
                     <span>
@@ -1742,7 +1773,7 @@ export const ItineraryTemplate = memo(
           )}
           {data.priceNote && (
             <span className="text-[11px] text-muted-foreground leading-tight">
-              {data.priceNote}
+              {data.mobilePriceNote || data.priceNote}
             </span>
           )}
         </>

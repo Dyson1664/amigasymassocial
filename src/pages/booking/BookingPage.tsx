@@ -289,7 +289,7 @@ export default function BookingPage2() {
       "Number of Guests": String(data.guestCount ?? 1),
       "Room Type":
         data.roomType === "single_upgrade"
-          ? "Single Room Upgrade (+$395 USD)"
+          ? "Single Room Upgrade (+$465 USD)"
           : "Standard Twin Room (no extra charge)",
       "Terms Accepted": "Yes",
       "Deposit Non-Refundable Acknowledged": "Yes",
@@ -449,7 +449,7 @@ export default function BookingPage2() {
                               Standard twin room (no extra charge)
                             </SelectItem>
                             <SelectItem value="single_upgrade">
-                              Single room upgrade (+$395 USD)
+                              Single room upgrade (+$465 USD)
                             </SelectItem>
                           </SelectContent>
                         </Select>
@@ -590,7 +590,7 @@ export default function BookingPage2() {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel className="cursor-pointer text-sm font-normal">
-                          I understand that the $500 deposit is non-refundable.
+                          I understand that the $400 deposit is non-refundable.
                         </FormLabel>
                         <FormMessage />
                       </div>

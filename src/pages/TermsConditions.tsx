@@ -10,8 +10,8 @@ const TERMS_SECTIONS = [
     title: "1. Parties, Contract & Acceptance",
     type: "paragraphs",
     content: [
-      "These Terms & Conditions apply to all tours operated by Imagine Beyond Travel / IBT Tours (\"IBT\"). IBT Tours (Imagine Beyond Travel) is the tour operator, merchant of record, and sole contracting party.",
-      "By booking a tour, you enter into a legally binding contract with IBT Tours. Payment of any booking fee, deposit, or balance confirms you have read, understood, and agreed to these Terms & Conditions in full.",
+      "These Terms & Conditions apply specifically to the Amigas Y Mas Social Vietnam tour operated by Imagine Beyond Travel / IBT Tours (\"IBT\"). IBT Tours (Imagine Beyond Travel) is the tour operator, merchant of record, and sole contracting party.",
+      "By booking the Amigas Y Mas Social Vietnam tour, you enter into a legally binding contract with IBT Tours. Payment of any booking fee, deposit, or balance confirms you have read, understood, and agreed to these Terms & Conditions in full.",
       "Only these Terms & Conditions, your booking confirmation, and the published tour inclusions/exclusions form part of your contract. Social media posts, community content, or verbal statements do not form part of the contract unless confirmed in writing by IBT.",
     ],
   },
@@ -22,7 +22,7 @@ const TERMS_SECTIONS = [
       "IBT Tours (Imagine Beyond Travel) is the merchant of record and processes payments via Shopify Payments or authorized processors.",
       "A deposit (or booking fee where applicable) is required to secure your place. All deposits and all balance payments are strictly non-refundable.",
       "Any payment made toward the tour (including deposits and installments) is non-refundable and forfeited in the event of cancellation by the traveler, no-show, late arrival, early departure, or failure to meet entry, passport, visa, or health requirements.",
-      "The remaining balance must be paid in full no later than 100 days before the trip start date. Failure to pay may result in cancellation with all amounts forfeited.",
+      "The remaining balance must be paid according to the payment schedule published at the time of booking. Failure to pay by the stated deadlines may result in cancellation with all amounts forfeited.",
       "All prices are quoted and charged in United States Dollars (USD).",
       "All participants must be 18 years of age or older at the time of booking.",
     ],
@@ -125,7 +125,7 @@ const TERMS_SECTIONS = [
   {
     title: "13. Images & Marketing",
     content: [
-      "By participating in an IBT tour, you grant a perpetual, worldwide, royalty-free license for use of photos or videos featuring your likeness for marketing purposes.",
+      "By participating in the Amigas Y Mas Social Vietnam tour, you grant a perpetual, worldwide, royalty-free license for use of photos or videos featuring your likeness for marketing purposes.",
     ],
   },
   {
@@ -163,9 +163,11 @@ const TermsConditions = React.memo(() => {
               <Scale className="w-12 h-12 text-primary" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms & Conditions</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Amigas Y Mas Social Terms & Conditions
+          </h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Updated 2026 · Last Updated: January 2026
+            Vietnam · February 25, 2027 · Last updated: August 2026
           </p>
         </div>
       </section>
@@ -176,8 +178,9 @@ const TermsConditions = React.memo(() => {
           <div className="bg-card border rounded-lg p-8 flex gap-3">
             <AlertCircle className="w-6 h-6 text-primary mt-1" />
             <p className="text-muted-foreground leading-relaxed">
-              These Terms & Conditions apply to all tours operated by IBT Tours (Imagine Beyond Travel).
-              Please read carefully before booking. Deposits and balance payments are strictly non-refundable.
+              These Terms & Conditions apply to the Amigas Y Mas Social Vietnam tour operated by
+              IBT Tours (Imagine Beyond Travel). Please read carefully before booking. Deposits and
+              balance payments are strictly non-refundable.
             </p>
           </div>
         </div>
