@@ -29,9 +29,9 @@ export const vietnamData = {
   id: "vietnam-emerald-escape",
   slug: "vietnam",
   title: "Best of Vietnam",
-  mobileTitle: "Amigas Y Mas Social",
+  mobileTitle: "Amigas y Más Social",
   mobileTitleKicker: "Best Of Vietnam",
-  desktopTitleKicker: "Amigas Y Mas Social",
+  desktopTitleKicker: "Amigas y Más Social",
   subtitle: "An 8-day Vietnam journey through Hanoi, Ha Long Bay, and Hoi An, blending culture, scenery, food, and nightlife.",
   location: "Vietnam",
   duration: "8 days",
@@ -39,7 +39,7 @@ export const vietnamData = {
   priceOriginal: "$1,950",
   priceNote: "Only 3 early-bird spots available — save $150 USD",
   mobilePriceNote: "3 early-bird spots",
-  ctaLabel: "Reserve Now $400",
+  ctaLabel: "Reserve Now $350",
   startDate: "February 25th, 2027",
   heroImage: vietnamHero,
   mobileHeroImage: haLongBay2,
@@ -60,7 +60,7 @@ export const vietnamData = {
     { emoji: "🧳", label: "Solo" },
   ],
   aboutDescription: [
-    "Join Amigas Y Mas Social in Vietnam for an unforgettable 8-day adventure through some of the country's most iconic destinations: Hanoi, Ha Long Bay, and Hoi An. We'll dive into the energy of Hanoi, cruise through the emerald waters of Ha Long Bay, and soak up the lantern-lit charm of Hoi An, blending culture, scenery, food, and group experiences along the way.",
+    "Join Amigas y Más Social in Vietnam for an unforgettable 8-day adventure through some of the country's most iconic destinations: Hanoi, Ha Long Bay, and Hoi An. We'll dive into the energy of Hanoi, cruise through the emerald waters of Ha Long Bay, and soak up the lantern-lit charm of Hoi An, blending culture, scenery, food, and group experiences along the way.",
     "Expect limestone cliffs, hidden bays, kayaking, rice fields, basket boats, local cooking, free time, nightlife, and plenty of moments to explore at your own pace. This trip is the perfect mix of bucket-list highlights and relaxed group travel, designed for anyone who wants to experience the best of Vietnam without overthinking the planning.",
   ],
   aboutImages: [vietnamHero, vietnamHero],
@@ -277,18 +277,18 @@ export const vietnamData = {
     },
   ],
   paymentPlanDescription:
-    "Secure your place with a $400 non-refundable deposit and pay the remaining balance in two installments.",
+    "Secure an early-bird place with a $350 non-refundable deposit. The regular deposit is $400, with the remaining balance paid in two installments.",
   paymentPlans: [
     {
       title: "Early Bird Price — First 3 Spots",
       price: "$1,800",
       featured: true,
       payments: [
-        { label: "Deposit at booking", amount: "$400" },
-        { label: "Payment 1 due November 3rd, 2026", amount: "$700" },
-        { label: "Final payment due January 18th, 2027", amount: "$700" },
+        { label: "Deposit at booking", amount: "$350" },
+        { label: "Payment 1 due November 3rd, 2026", amount: "$725" },
+        { label: "Final payment due January 18th, 2027", amount: "$725" },
       ],
-      note: "Single room: add the $465 supplement to payment 1, making that payment $1,165 and the trip total $2,265.",
+      note: "Single room: add the $465 supplement to payment 1, making that payment $1,190 and the trip total $2,265.",
     },
     {
       title: "Regular Price",

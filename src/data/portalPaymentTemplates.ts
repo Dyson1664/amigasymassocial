@@ -39,17 +39,17 @@ export type PortalPackageTemplate = {
   installments: PaymentInstallmentTemplate[];
 };
 
-const depositInstallment: PaymentInstallmentTemplate = {
+const depositInstallment = (amount: number): PaymentInstallmentTemplate => ({
   payment_label: "Deposit",
   payment_type: "deposit",
-  base_amount: 400,
+  base_amount: amount,
   upgrade_portion: 0,
   discount_amount: 0,
-  total_amount: 400,
+  total_amount: amount,
   currency: "USD",
   due_date: null,
   status: "paid",
-};
+});
 
 const balanceDueDates = [
   "2026-11-03",
@@ -75,41 +75,41 @@ const balances = (
 export const PORTAL_PACKAGE_TEMPLATES: PortalPackageTemplate[] = [
   {
     package_type: "early_bird",
-    package_name: "Vietnam with Amigas Y Mas Social – Early Bird",
+    package_name: "Vietnam with Amigas y Más Social – Early Bird",
     total_trip_price: 1800,
-    deposit_amount: 400,
-    balance_remaining: 1400,
-    installments: [depositInstallment, ...balances([700, 700])],
+    deposit_amount: 350,
+    balance_remaining: 1450,
+    installments: [depositInstallment(350), ...balances([725, 725])],
   },
   {
     package_type: "early_bird_single_room",
-    package_name: "Vietnam with Amigas Y Mas Social – Early Bird + Single Room",
+    package_name: "Vietnam with Amigas y Más Social – Early Bird + Single Room",
     total_trip_price: 2265,
-    deposit_amount: 400,
-    balance_remaining: 1865,
+    deposit_amount: 350,
+    balance_remaining: 1915,
     room_upgrade_enabled: true,
     room_upgrade_name: "Single Room Supplement",
     room_upgrade_total: 465,
-    installments: [depositInstallment, ...balances([700, 700], 465)],
+    installments: [depositInstallment(350), ...balances([725, 725], 465)],
   },
   {
     package_type: "standard",
-    package_name: "Vietnam with Amigas Y Mas Social – Regular",
+    package_name: "Vietnam with Amigas y Más Social – Regular",
     total_trip_price: 1950,
     deposit_amount: 400,
     balance_remaining: 1550,
-    installments: [depositInstallment, ...balances([775, 775])],
+    installments: [depositInstallment(400), ...balances([775, 775])],
   },
   {
     package_type: "standard_single_room",
-    package_name: "Vietnam with Amigas Y Mas Social – Regular + Single Room",
+    package_name: "Vietnam with Amigas y Más Social – Regular + Single Room",
     total_trip_price: 2415,
     deposit_amount: 400,
     balance_remaining: 2015,
     room_upgrade_enabled: true,
     room_upgrade_name: "Single Room Supplement",
     room_upgrade_total: 465,
-    installments: [depositInstallment, ...balances([775, 775], 465)],
+    installments: [depositInstallment(400), ...balances([775, 775], 465)],
   },
 ];
 

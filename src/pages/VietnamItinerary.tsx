@@ -90,7 +90,7 @@ const VietnamDesktopHero = () => {
           />
           <img
             src={vietnamData.desktopTopMiddleImage}
-            alt="Amigas Y Mas Social group holding their flag"
+            alt="Amigas y Más Social group holding their flag"
             className="col-span-5 h-full w-full object-cover"
           />
           <img

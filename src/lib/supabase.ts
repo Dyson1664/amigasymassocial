@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 export const PORTAL_TRIP_SLUG = "vietnam-amigas-y-mas-social";
-export const PORTAL_TRIP_NAME = "Vietnam with Amigas Y Mas Social";
+export const PORTAL_TRIP_NAME = "Vietnam with Amigas y Más Social";
 export const PORTAL_CURRENCY = "USD";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;

@@ -107,9 +107,6 @@ const baseSchema = z.object({
   termsAccepted: z.literal(true, {
     errorMap: () => ({ message: "You must accept the terms and conditions" }),
   }),
-  depositNonRefundableAccepted: z.literal(true, {
-    errorMap: () => ({ message: "You must acknowledge the deposit policy" }),
-  }),
 });
 
 /**
@@ -241,7 +238,6 @@ export default function BookingPage2() {
       guestCount: 1,
       roomType: "standard_twin",
       termsAccepted: undefined,
-      depositNonRefundableAccepted: undefined,
 
       passportFirstNameGivenName: "",
       passportSurname: "",
@@ -292,7 +288,6 @@ export default function BookingPage2() {
           ? "Single Room Upgrade (+$465 USD)"
           : "Standard Twin Room (no extra charge)",
       "Terms Accepted": "Yes",
-      "Deposit Non-Refundable Acknowledged": "Yes",
     };
 
     if (config.requiresPassport) {
@@ -570,27 +565,6 @@ export default function BookingPage2() {
                           >
                             Terms and Conditions
                           </a>
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="depositNonRefundableAccepted"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="cursor-pointer text-sm font-normal">
-                          I understand that the $400 deposit is non-refundable.
                         </FormLabel>
                         <FormMessage />
                       </div>

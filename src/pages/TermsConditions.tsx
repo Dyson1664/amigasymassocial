@@ -10,8 +10,8 @@ const TERMS_SECTIONS = [
     title: "1. Parties, Contract & Acceptance",
     type: "paragraphs",
     content: [
-      "These Terms & Conditions apply specifically to the Amigas Y Mas Social Vietnam tour operated by Imagine Beyond Travel / IBT Tours (\"IBT\"). IBT Tours (Imagine Beyond Travel) is the tour operator, merchant of record, and sole contracting party.",
-      "By booking the Amigas Y Mas Social Vietnam tour, you enter into a legally binding contract with IBT Tours. Payment of any booking fee, deposit, or balance confirms you have read, understood, and agreed to these Terms & Conditions in full.",
+      "These Terms & Conditions apply specifically to the Amigas y Más Social Vietnam tour operated by Imagine Beyond Travel / IBT Tours (\"IBT\"). IBT Tours (Imagine Beyond Travel) is the tour operator, merchant of record, and sole contracting party.",
+      "By booking the Amigas y Más Social Vietnam tour, you enter into a legally binding contract with IBT Tours. Payment of any booking fee, deposit, or balance confirms you have read, understood, and agreed to these Terms & Conditions in full.",
       "Only these Terms & Conditions, your booking confirmation, and the published tour inclusions/exclusions form part of your contract. Social media posts, community content, or verbal statements do not form part of the contract unless confirmed in writing by IBT.",
     ],
   },
@@ -125,7 +125,7 @@ const TERMS_SECTIONS = [
   {
     title: "13. Images & Marketing",
     content: [
-      "By participating in the Amigas Y Mas Social Vietnam tour, you grant a perpetual, worldwide, royalty-free license for use of photos or videos featuring your likeness for marketing purposes.",
+      "By participating in the Amigas y Más Social Vietnam tour, you grant a perpetual, worldwide, royalty-free license for use of photos or videos featuring your likeness for marketing purposes.",
     ],
   },
   {
@@ -164,7 +164,7 @@ const TermsConditions = React.memo(() => {
             </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Amigas Y Mas Social Terms & Conditions
+            Amigas y Más Social Terms & Conditions
           </h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
             Vietnam · February 25, 2027 · Last updated: August 2026
@@ -178,7 +178,7 @@ const TermsConditions = React.memo(() => {
           <div className="bg-card border rounded-lg p-8 flex gap-3">
             <AlertCircle className="w-6 h-6 text-primary mt-1" />
             <p className="text-muted-foreground leading-relaxed">
-              These Terms & Conditions apply to the Amigas Y Mas Social Vietnam tour operated by
+              These Terms & Conditions apply to the Amigas y Más Social Vietnam tour operated by
               IBT Tours (Imagine Beyond Travel). Please read carefully before booking. Deposits and
               balance payments are strictly non-refundable.
             </p>
