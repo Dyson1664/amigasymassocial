@@ -1,6 +1,6 @@
 import vietnamHero from "@/assets/vn/vietnam-hero.webp";
 import vnBasketBoat from "@/assets/vn/vn-basketboat.webp";
-import haLongBayCruise2 from "@/assets/vn/ha long bay ruise-2.jpg";
+import haLongBayCruise2 from "@/assets/vn/ha long bay ruise-2.webp";
 import vnBikeRide from "@/assets/vn/vn-bike-ride.webp";
 import vnHalongBay from "@/assets/vn/vn-halongbay.webp";
 import vnHanoi1 from "@/assets/vn/vn-hanoi1.webp";
@@ -9,20 +9,25 @@ import vnHanoiTrainStreet from "@/assets/vn/train street.webp";
 import tripHighlight2 from "@/assets/vn/trip-highlight-2.webp";
 import vnLanternDesktop from "@/assets/vn/vn-lantern-desktop.webp";
 import vnLantern2 from "@/assets/vn/vn-lantern2.webp";
-import releasingLanterns from "@/assets/vn/releasing lanters.jpg";
-import sallyLanterns from "@/assets/vn/sally-lanterns.jpg";
-import yMasFlag2 from "@/assets/vn/y-mas-flag2.jpg";
-import hoiAnMoments3 from "@/assets/vn/hoi-an-moments-3.jpg";
-import day7HoiAnImage from "@/assets/vn/day 7 hoi an image.jpg";
-import haLongBay2 from "@/assets/vn/ha-long-bay-2.jpg";
+import releasingLanterns from "@/assets/vn/releasing lanters.webp";
+import sallyLanterns from "@/assets/vn/sally-lanterns.webp";
+import yMasFlag2 from "@/assets/vn/y-mas-flag2.webp";
+import hoiAnMoments3 from "@/assets/vn/hoi-an-moments-3.webp";
+import day7HoiAnImage from "@/assets/vn/day 7 hoi an image.webp";
+import haLongBay2 from "@/assets/vn/ha-long-bay-2.webp";
 import vietnamVideo from "@/assets/vn/vietnam-video.mp4";
-import hanoiHotel2 from "@/assets/vn/hotels/hanoi-hotel-2.webp";
-import hanoiHotel3 from "@/assets/vn/hotels/hanoi-hotel-3.png";
-import cruiseRoom1 from "@/assets/vn/hotels/cruise-room.webp";
-import cruiseRoom2 from "@/assets/vn/hotels/cruise-room-2.webp";
-import cruise3 from "@/assets/vn/hotels/cruise-3.webp";
+import hanoiFirstStay2 from "@/assets/vn/hotels/hanoi  1st/hanoi-first-stay-02.webp";
+import hanoiFirstStay3 from "@/assets/vn/hotels/hanoi  1st/hanoi-first-stay-03.webp";
+import hanoiFirstStay4 from "@/assets/vn/hotels/hanoi  1st/hanoi-first-stay-04.webp";
+import hanoiReturnStay2 from "@/assets/vn/hotels/hanoi 2nd/hanoi-return-stay-02.webp";
+import hanoiReturnStay3 from "@/assets/vn/hotels/hanoi 2nd/hanoi-return-stay-03.webp";
+import hanoiReturnStay4 from "@/assets/vn/hotels/hanoi 2nd/hanoi-return-stay-04.webp";
+import hanoiReturnStay5 from "@/assets/vn/hotels/hanoi 2nd/hanoi-return-stay-05.webp";
+import cruiseRoom1 from "@/assets/vn/hotels/cruise/ha-long-bay-cruise-cabin-01.webp";
+import cruiseRoom2 from "@/assets/vn/hotels/cruise/ha-long-bay-cruise-cabin-02.webp";
 import hoiAnHotel1 from "@/assets/vn/hotels/hoi an-hotel.webp";
-import hoiAnHotel2 from "@/assets/vn/hotels/hoi-an-hotel2.jpg";
+import hoiAnHotel2 from "@/assets/vn/hotels/hoi-an-hotel2.webp";
+import hoiAnHotel3 from "@/assets/vn/hotels/hoi an-hotel-3.webp";
 import { Home, Zap, Plane, Users, UtensilsCrossed } from "lucide-react";
 
 export const vietnamData = {
@@ -83,19 +88,24 @@ export const vietnamData = {
   ],
   accommodations: [
     {
-      title: "Golden Silk Boutique Hotel",
-      description: "A stylish 4-star stay in the heart of Hanoi's Old Quarter, just a five-minute walk from Hoan Kiem Lake and perfectly placed for vibrant streets, local cafes, markets, and the city's incredible food scene.",
-      images: [hanoiHotel3, hanoiHotel2],
+      title: "Hanoi Splendid Premium",
+      description: "Settle into a stylish 5-star hotel in central Hanoi, perfectly placed for exploring the Old Quarter, local cafes, markets, and the city's incredible food scene before the Ha Long Bay cruise.",
+      images: [hanoiFirstStay2, hanoiFirstStay3, hanoiFirstStay4],
     },
     {
       title: "Ha Long Bay overnight cruise",
-      description: "Relax in an elegant private cabin as you sail through Ha Long Bay, with beautiful views, candlelit dining, and sunrise over the limestone karsts.",
-      images: [cruiseRoom1, cruiseRoom2, cruise3],
+      description: "Relax in an elegant private cabin as you sail through Ha Long Bay, with beautiful views, dinner, and sunrise over the limestone karsts.",
+      images: [cruiseRoom1, cruiseRoom2],
+    },
+    {
+      title: "Hanoi Solis",
+      description: "Return to a comfortable 5-star Hanoi hotel after the overnight cruise, with time to unwind before the next day's flight to Da Nang and onward transfer to Hoi An.",
+      images: [hanoiReturnStay4, hanoiReturnStay5, hanoiReturnStay2, hanoiReturnStay3],
     },
     {
       title: "Le Pavillon Hoi An Gallery Hotel & Spa",
       description: "Unwind in this stylish 4-star Hoi An hotel, with inviting rooms and a relaxing spa setting within easy reach of the lantern-lit Old Town.",
-      images: [hoiAnHotel1, hoiAnHotel2],
+      images: [hoiAnHotel1, hoiAnHotel2, hoiAnHotel3],
     },
   ],
   whatsIncludedHighlights: [
@@ -140,7 +150,7 @@ export const vietnamData = {
         "Welcome to Hanoi, the vibrant and historic heart of Vietnam. Upon arrival, enjoy a private airport transfer to your hotel and time to refresh after your journey. In the evening, we gather for an included welcome dinner, a perfect opportunity to meet your fellow travelers and enjoy your first taste of authentic Vietnamese cuisine. Following dinner, a brief orientation will outline the exciting week ahead and officially begin our Vietnam adventure.",
       meals: "Dinner",
       highlights: "Airport pick up, welcome dinner",
-      accommodation: { name: "Golden Silk Boutique Hotel or similar" },
+      accommodation: { name: "Hanoi Splendid Premium or similar" },
       transportation: {
         mode: "Car",
         from: "Hanoi Airport",
@@ -151,37 +161,38 @@ export const vietnamData = {
     {
       day: 2,
       date: "Feb 26th",
-      title: "Ha Long Bay Overnight Cruise",
-      location: "Ha Long Bay, Vietnam",
-      heroImage: haLongBay2,
-      description:
-        "This morning, depart Hanoi for the breathtaking Ha Long Bay. Board your overnight cruise and enjoy lunch as you sail through emerald waters and towering limestone karsts. Spend the afternoon kayaking and swimming at Tra Bau, followed by a sunset party, Vietnamese cooking class, and candlelit dinner on board.",
-      meals: "Lunch, Dinner",
-      highlights: "Kayaking, swimming at Tra Bau, sunset party, Vietnamese cooking class",
-      accommodation: { name: "Ha Long Bay overnight cruise" },
-    },
-    {
-      day: 3,
-      date: "Feb 27th",
-      title: "Ha Long Bay to Hanoi",
-      location: "Ha Long Bay / Hanoi, Vietnam",
-      heroImage: haLongBayCruise2,
-      description:
-        "Wake early to enjoy the sunrise over Ha Long Bay, before visiting the Dark & Light Cave by bamboo boat. After a final lunch onboard, we transfer back to Hanoi. The evening is free to relax or join an optional group dinner.",
-      meals: "Breakfast, Lunch",
-      highlights: "Ha Long Bay sunrise, Dark & Light Cave by bamboo boat",
-      accommodation: { name: "Golden Silk Boutique Hotel or similar" },
-    },
-    {
-      day: 4,
-      date: "Feb 28th",
       title: "Hanoi Culture & Nightlife Experience",
       location: "Hanoi, Vietnam",
       heroImage: vnHanoiTrainStreet,
       description:
-        "Today we dive into the energy and culture of Hanoi. We begin with a guided walking street tour through the Old Quarter, exploring hidden alleyways, local markets, and vibrant street life. Along the way, we stop for a traditional egg coffee demonstration, learning how this iconic Vietnamese drink is made and tasting it for ourselves. Next, we visit the famous Train Street, where trains pass just inches from homes and cafes, a truly unique and unforgettable experience. As the evening sets in, we explore Hanoi's buzzing nightlife, with plenty of options for food, drinks, and lively atmosphere.",
+        "Spend a full day discovering the energy and culture of Hanoi before travelling to Ha Long Bay tomorrow. Begin with a guided walking tour through the Old Quarter, exploring hidden alleyways, local markets, and vibrant street life. Stop for a traditional egg coffee demonstration, then visit the famous Train Street, where trains pass just inches from homes and cafes. In the evening, experience Hanoi's buzzing nightlife, with plenty of options for food, drinks, and lively atmosphere.",
+      meals: "Breakfast",
       highlights: "Hanoi Old Town, walking tour, egg coffee experience, Train Street visit",
-      accommodation: { name: "Golden Silk Boutique Hotel or similar" },
+      accommodation: { name: "Hanoi Splendid Premium or similar" },
+    },
+    {
+      day: 3,
+      date: "Feb 27th",
+      title: "Hanoi to Ha Long Bay Overnight Cruise",
+      location: "Hanoi / Ha Long Bay, Vietnam",
+      heroImage: haLongBay2,
+      description:
+        "After breakfast, leave Hanoi and travel to the breathtaking Ha Long Bay. Board your overnight cruise and enjoy lunch as you sail through emerald waters and towering limestone karsts. Spend the afternoon kayaking and swimming at Tra Bau, followed by a sunset party, Vietnamese cooking class, and dinner on board.",
+      meals: "Breakfast, Lunch, Dinner",
+      highlights: "Kayaking, swimming at Tra Bau, sunset party, Vietnamese cooking class",
+      accommodation: { name: "Ha Long Bay overnight cruise" },
+    },
+    {
+      day: 4,
+      date: "Feb 28th",
+      title: "Ha Long Bay to Hanoi",
+      location: "Ha Long Bay / Hanoi, Vietnam",
+      heroImage: haLongBayCruise2,
+      description:
+        "Wake early to enjoy sunrise over Ha Long Bay before visiting the Dark & Light Cave by bamboo boat. After a final lunch onboard, disembark and transfer back to Hanoi for a different hotel stay. The evening is free to relax, explore nearby, or join an optional group dinner before flying to Da Nang the following day.",
+      meals: "Breakfast, Lunch",
+      highlights: "Ha Long Bay sunrise, Dark & Light Cave by bamboo boat, return to Hanoi",
+      accommodation: { name: "Hanoi Solis or similar" },
     },
     {
       day: 5,
@@ -191,6 +202,7 @@ export const vietnamData = {
       heroImage: releasingLanterns,
       description:
         "We head to the airport and fly to another vibrant city, the enchanting lantern-filled town of Hoi An. Bursting with charm and color, this magical Old Town feels like stepping into a storybook. After check-in and a little time to refresh, we dive straight into the atmosphere, wandering glowing lantern-lit streets, exploring cute boutiques, stopping at lively riverside cafes, and soaking up the buzzing energy. As night falls, we head out for dinner before releasing floating lanterns together on the river and embracing Hoi An's playful, romantic, and electric atmosphere.",
+      meals: "Breakfast",
       highlights: "Releasing floating lanterns",
       accommodation: { name: "Le Pavillon Hoi An Gallery Hotel & Spa or similar" },
     },
@@ -202,7 +214,7 @@ export const vietnamData = {
       heroImage: vnBikeRide,
       description:
         "After breakfast, enjoy a scenic bicycle ride through rice fields and rural villages surrounding Hoi An. Next, experience an exciting basket boat ride through coconut groves, followed by a local cooking demonstration. We then enjoy lunch before a free afternoon for shopping, tailor visits, or relaxation. Optional evening dinner and nightlife available.",
-      meals: "Lunch",
+      meals: "Breakfast, Lunch",
       highlights: "Bicycle tour, basket boating, cooking demonstration",
       accommodation: { name: "Le Pavillon Hoi An Gallery Hotel & Spa or similar" },
     },
@@ -214,7 +226,7 @@ export const vietnamData = {
       heroImage: day7HoiAnImage,
       description:
         "Today is yours to enjoy at leisure. Relax at the beach, visit tailor shops, join a lantern-making workshop, unwind at a spa, or spend more time exploring Hoi An's lantern-lit streets at your own pace. In the evening, we come together for an included farewell dinner to celebrate our final night and the memories made along the way.",
-      meals: "Dinner",
+      meals: "Breakfast, Dinner",
       highlights: "Free day, farewell dinner",
       accommodation: { name: "Le Pavillon Hoi An Gallery Hotel & Spa or similar" },
     },

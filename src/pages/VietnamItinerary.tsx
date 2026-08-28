@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CalendarIcon, Clock, MapPin } from "lucide-react";
 import { ItineraryTemplate } from "@/components/ItineraryTemplate";
 import { vietnamData } from "@/data/countries/vietnam";
@@ -122,15 +122,28 @@ const VietnamDesktopHero = () => {
 };
 
 const VietnamItinerary = () => {
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches,
+  );
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    const updateViewport = (event: MediaQueryListEvent) => setIsDesktop(event.matches);
+
+    setIsDesktop(desktopQuery.matches);
+    desktopQuery.addEventListener("change", updateViewport);
+    return () => desktopQuery.removeEventListener("change", updateViewport);
   }, []);
 
   return (
     <ItineraryTemplate
       data={vietnamData}
       hideDesktopHero
-      desktopHero={<VietnamDesktopHero />}
+      desktopHero={isDesktop ? <VietnamDesktopHero /> : undefined}
     />
   );
 };

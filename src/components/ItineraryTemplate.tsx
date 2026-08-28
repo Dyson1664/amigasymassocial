@@ -514,13 +514,17 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
   // Update current index when carousel changes
   useEffect(() => {
     if (!api) return;
-    
+
     const onSelect = () => {
       setCurrentIndex(api.selectedScrollSnap());
     };
-    
+
     api.on("select", onSelect);
     onSelect(); // Set initial state
+
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
 
   // Single image - no carousel needed
@@ -539,9 +543,10 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
   // On mobile, show dots for navigation; swipe naturally moves between images
   return (
     <div className="relative group">
-      <Carousel 
-        className="w-full" 
+      <Carousel
+        className="w-full"
         setApi={setApi}
+        opts={{ loop: true }}
       >
         <CarouselContent>
           {allImages.map((img, idx) => (
@@ -555,14 +560,17 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
             </CarouselItem>
           ))}
         </CarouselContent>
-        
+
+        <div className="absolute right-3 top-3 z-10 rounded-full bg-black/65 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+          {currentIndex + 1} / {allImages.length}
+        </div>
+
         {/* Desktop arrows - sleek pill design, appear on hover */}
         <button
           onClick={() => api?.scrollPrev()}
-          className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 
-                     opacity-0 group-hover:opacity-100 
+          className="flex absolute left-3 top-1/2 -translate-y-1/2
                      transition-all duration-300 ease-out
-                     bg-white/95 backdrop-blur-sm hover:bg-white 
+                     bg-white/95 backdrop-blur-sm hover:bg-white
                      hover:scale-110 active:scale-95
                      shadow-lg hover:shadow-xl
                      h-8 w-8 rounded-full
@@ -570,15 +578,15 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
                      border border-black/5"
           aria-label="Previous image"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2.5" 
-            strokeLinecap="round" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             strokeLinejoin="round"
             className="text-foreground/80"
           >
@@ -587,10 +595,9 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
         </button>
         <button
           onClick={() => api?.scrollNext()}
-          className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 
-                     opacity-0 group-hover:opacity-100 
+          className="flex absolute right-3 top-1/2 -translate-y-1/2
                      transition-all duration-300 ease-out
-                     bg-white/95 backdrop-blur-sm hover:bg-white 
+                     bg-white/95 backdrop-blur-sm hover:bg-white
                      hover:scale-110 active:scale-95
                      shadow-lg hover:shadow-xl
                      h-8 w-8 rounded-full
@@ -598,15 +605,15 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
                      border border-black/5"
           aria-label="Next image"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="16" 
-            height="16" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2.5" 
-            strokeLinecap="round" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
             strokeLinejoin="round"
             className="text-foreground/80"
           >
@@ -614,7 +621,7 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
           </svg>
         </button>
       </Carousel>
-      
+
       {/* Dots indicator - shows current position */}
       <div className="flex justify-center gap-2 mt-3">
         {allImages.map((_, idx) => (
@@ -622,8 +629,8 @@ const HotelImageGallery = memo(({ accommodation, className }: { accommodation: A
             key={idx}
             onClick={() => api?.scrollTo(idx)}
             className={`transition-all duration-300 rounded-full ${
-              idx === currentIndex 
-                ? "bg-primary w-4 h-1.5" 
+              idx === currentIndex
+                ? "bg-primary w-4 h-1.5"
                 : "bg-primary/25 hover:bg-primary/40 w-1.5 h-1.5"
             }`}
             aria-label={`Go to image ${idx + 1}`}
@@ -707,7 +714,7 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
       if (day.accommodation?.name && !seen.has(day.accommodation.name)) {
         // Skip "Check-out" or similar non-accommodation entries
         if (day.accommodation.name.toLowerCase().includes("check-out")) continue;
-        
+
         seen.add(day.accommodation.name);
         extracted.push({
           title: day.accommodation.name,
@@ -790,8 +797,8 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
                         )}
                       </div>
                     ) : (
-                      <HotelImageGallery 
-                        accommodation={accommodation} 
+                      <HotelImageGallery
+                        accommodation={accommodation}
                         className="w-full h-56 md:h-64 lg:h-72 object-cover rounded-2xl shadow-md"
                       />
                     )}
@@ -809,8 +816,8 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
             </div>
           </div>
         ) : (
-          <Carousel 
-            className="hidden md:block w-full max-w-none mx-auto" 
+          <Carousel
+            className="hidden md:block w-full max-w-none mx-auto"
             setApi={setCarouselApi}
             opts={{ slidesToScroll: 1, align: "start" }}
           >
@@ -869,8 +876,8 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
                           )}
                         </div>
                       ) : (
-                        <HotelImageGallery 
-                          accommodation={accommodation} 
+                        <HotelImageGallery
+                          accommodation={accommodation}
                           className="w-full h-56 md:h-64 lg:h-72 object-cover rounded-2xl shadow-md"
                         />
                       )}
@@ -939,8 +946,8 @@ const WhereWeStay = memo(({ data }: { data: CountryData }) => {
                         )}
                       </div>
                     ) : (
-                      <HotelImageGallery 
-                        accommodation={accommodation} 
+                      <HotelImageGallery
+                        accommodation={accommodation}
                         className="w-full h-56 object-cover rounded-2xl shadow-md"
                       />
                     )}
@@ -1508,6 +1515,13 @@ export const ItineraryTemplate = memo(
 
     return (
       <div className={STATIC_STYLES.gradient}>
+        <link
+          rel="preload"
+          as="image"
+          href={data.mobileHeroImage || data.heroImage}
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
         <Navbar logoStyle={logoStyle} />
         {desktopHero}
 
@@ -1524,7 +1538,7 @@ export const ItineraryTemplate = memo(
               alt={`${data.title} hero`}
               className="absolute inset-0 h-full w-full object-cover"
               loading="eager"
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
             />
             <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
