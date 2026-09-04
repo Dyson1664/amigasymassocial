@@ -40,11 +40,10 @@ export const vietnamData = {
   subtitle: "An 8-day Vietnam journey through Hanoi, Ha Long Bay, and Hoi An, blending culture, scenery, food, and nightlife.",
   location: "Vietnam",
   duration: "8 days",
-  price: "$1,800",
-  priceOriginal: "$1,950",
-  priceNote: "Only 3 early-bird spots available — save $150 USD",
-  mobilePriceNote: "3 early-bird spots",
-  ctaLabel: "Reserve Now $350",
+  price: "$1,950",
+  priceNote: "Early bird sold out",
+  mobilePriceNote: "Early bird sold out",
+  ctaLabel: "Reserve Now $400",
   startDate: "February 25th, 2027",
   heroImage: vietnamHero,
   mobileHeroImage: haLongBay2,
@@ -289,10 +288,10 @@ export const vietnamData = {
     },
   ],
   paymentPlanDescription:
-    "Secure an early-bird place with a $350 non-refundable deposit. The regular deposit is $400, with the remaining balance paid in two installments.",
+    "Secure your place with a $400 non-refundable deposit, with the remaining balance paid in two installments. The sold-out early-bird plan remains below for reference.",
   paymentPlans: [
     {
-      title: "Early Bird Price — First 3 Spots",
+      title: "Early Bird Price — Sold Out",
       price: "$1,800",
       featured: true,
       payments: [

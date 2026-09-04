@@ -18,7 +18,7 @@ export const destinationsData: Record<string, DestinationData> = {
         duration: "8 days",
         description: "Journey through Hanoi, Ha Long Bay, and Hoi An with culture, scenery, food, and nightlife",
         image: vietnamHeroImage,
-        price: "$1,800",
+        price: "$1,950",
         route: "/vietnam-itinerary"
       }
     ],

@@ -56,7 +56,7 @@ const BOOKING_CONFIG: Record<
   vietnam: {
     countryName: "Vietnam",
     productHandle: "vietnam-deposit",
-    variantId: "45873111597235",
+    variantId: "45873122476211",
     requiresPassport: false,
     shopifyDomain: "tbff.imaginebeyondtravel.com",
   },
