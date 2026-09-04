@@ -251,6 +251,7 @@ export default function BookingPage2() {
 
   const { isValid } = form.formState;
   const selectedRoomType = form.watch("roomType");
+  const selectedGuestCount = Number(form.watch("guestCount")) || 1;
   if (!config) {
     return (
       <div className="min-h-screen bg-background">
@@ -421,6 +422,20 @@ export default function BookingPage2() {
                         />
                       </FormControl>
                       <FormMessage />
+                      {selectedGuestCount > 1 && (
+                        <p className="mt-2 rounded-md border border-primary/20 bg-primary/5 px-3 py-2 text-xs leading-5 text-muted-foreground">
+                          Booking for more than one guest? Please email the additional guest information to{" "}
+                          <a
+                            href={`mailto:bookings@imaginebeyondtravel.com?subject=${encodeURIComponent(
+                              `Additional guest information - ${config.countryName}`,
+                            )}`}
+                            className="font-semibold text-primary underline underline-offset-2"
+                          >
+                            bookings@imaginebeyondtravel.com
+                          </a>
+                          .
+                        </p>
+                      )}
                     </FormItem>
                   )}
                 />
