@@ -108,7 +108,8 @@ type BookingFormState = {
   booking_status: string;
 };
 
-const initialPackageTemplate = PORTAL_PACKAGE_TEMPLATES[0];
+const initialPackageTemplate =
+  getPortalPackageTemplate("standard") ?? PORTAL_PACKAGE_TEMPLATES[0];
 
 const emptyBookingForm: BookingFormState = {
   guest_name: "",
@@ -501,50 +502,6 @@ export default function AdminPayments() {
     setSelectedInstallmentId(nextInstallments[0]?.id ?? null);
   };
 
-  const verifySelectedBookingIsCurrent = async () => {
-    if (!supabase || !bookingForm.id || !selectedBooking) return true;
-
-    const { data: currentBooking, error: versionError } = await supabase
-      .from("guest_bookings")
-      .select("updated_at, payment_installments(id, updated_at)")
-      .eq("id", bookingForm.id)
-      .eq("trip_slug", PORTAL_TRIP_SLUG)
-      .single();
-
-    if (versionError || !currentBooking) {
-      setError(versionError?.message ?? "Could not verify the current booking version.");
-      return false;
-    }
-
-    if (currentBooking.updated_at !== selectedBooking.updated_at) {
-      setError("This booking changed in another admin session. Reload before saving so no updates are overwritten.");
-      return false;
-    }
-
-    const currentInstallments = new Map(
-      (currentBooking.payment_installments ?? []).map((installment) => [
-        installment.id,
-        installment.updated_at,
-      ])
-    );
-    const trackedInstallments = [
-      ...installments.filter((installment) => !installment.id.startsWith("new-")),
-      ...(selectedBooking.payment_installments ?? []).filter((installment) =>
-        installmentIdsPendingDeletion.includes(installment.id)
-      ),
-    ];
-
-    const hasStaleInstallment = trackedInstallments.some(
-      (installment) => currentInstallments.get(installment.id) !== installment.updated_at
-    );
-    if (hasStaleInstallment) {
-      setError("A payment changed in another admin session. Reload before saving so no updates are overwritten.");
-      return false;
-    }
-
-    return true;
-  };
-
   const saveBooking = async (event: FormEvent) => {
     event.preventDefault();
     if (!supabase) return;
@@ -565,12 +522,9 @@ export default function AdminPayments() {
       return;
     }
 
-    if (!(await verifySelectedBookingIsCurrent())) {
-      setIsSaving(false);
-      return;
-    }
-
     const bookingPayload = {
+      id: bookingForm.id ?? null,
+      expected_updated_at: selectedBooking?.updated_at ?? null,
       trip_slug: PORTAL_TRIP_SLUG,
       guest_name: bookingForm.guest_name.trim(),
       guest_email: normalizedEmail,
@@ -588,89 +542,56 @@ export default function AdminPayments() {
       booking_status: bookingForm.booking_status.trim() || "active",
     };
 
-    const bookingResult = bookingForm.id
-      ? await supabase
-          .from("guest_bookings")
-          .update(bookingPayload)
-          .eq("id", bookingForm.id)
-          .eq("trip_slug", PORTAL_TRIP_SLUG)
-          .eq("updated_at", selectedBooking?.updated_at ?? "")
-          .select("id, updated_at")
-          .maybeSingle()
-      : await supabase.from("guest_bookings").insert(bookingPayload).select("id").single();
+    const installmentsToSave = createInstallmentsFromPackage(
+      bookingForm.package_type,
+      installments,
+      bookingForm.id ?? ""
+    ).map((installment) => ({
+      id: installment.id,
+      expected_updated_at: installment.updated_at || null,
+      payment_label: installment.payment_label,
+      payment_type: installment.payment_type,
+      base_amount: Number(installment.base_amount ?? 0),
+      upgrade_portion: Number(installment.upgrade_portion ?? 0),
+      discount_amount: Number(installment.discount_amount ?? 0),
+      total_amount: Number(installment.total_amount ?? 0),
+      currency: installment.currency || PORTAL_CURRENCY,
+      due_date: installment.due_date || null,
+      status: installment.status || "upcoming",
+      shopify_payment_link: installment.shopify_payment_link?.trim() || null,
+      paid_at:
+        installment.status === "paid"
+          ? installment.paid_at ?? new Date().toISOString()
+          : null,
+      admin_notes: installment.admin_notes?.trim() || null,
+    }));
 
-    if (bookingResult.error || !bookingResult.data) {
+    const deletedInstallments = (selectedBooking?.payment_installments ?? [])
+      .filter((installment) => installmentIdsPendingDeletion.includes(installment.id))
+      .map((installment) => ({
+        id: installment.id,
+        expected_updated_at: installment.updated_at,
+      }));
+
+    const { data: bookingId, error: saveError } = await supabase.rpc(
+      "save_portal_booking",
+      {
+        input_trip_slug: PORTAL_TRIP_SLUG,
+        input_booking: bookingPayload,
+        input_installments: installmentsToSave,
+        input_deleted_installments: deletedInstallments,
+      }
+    );
+
+    if (saveError || !bookingId) {
       setError(
-        bookingResult.error?.code === "23505"
+        saveError?.code === "23505"
           ? `A ${PORTAL_TRIP_NAME} booking already exists for this email. Open the existing booking instead.`
-          : bookingResult.error?.message ??
+          : saveError?.message ??
               "This booking changed in another admin session. Reload before saving."
       );
       setIsSaving(false);
       return;
-    }
-
-    const bookingId = bookingResult.data.id;
-
-    const installmentsToSave = createInstallmentsFromPackage(
-      bookingForm.package_type,
-      installments,
-      bookingId
-    );
-
-    for (const installment of installmentsToSave) {
-      const installmentPayload = {
-        guest_booking_id: bookingId,
-        payment_label: installment.payment_label,
-        payment_type: installment.payment_type,
-        base_amount: Number(installment.base_amount ?? 0),
-        upgrade_portion: Number(installment.upgrade_portion ?? 0),
-        discount_amount: Number(installment.discount_amount ?? 0),
-        total_amount: Number(installment.total_amount ?? 0),
-        currency: installment.currency || PORTAL_CURRENCY,
-        due_date: installment.due_date || null,
-        status: installment.status || "upcoming",
-        shopify_payment_link: installment.shopify_payment_link?.trim() || null,
-        paid_at: installment.status === "paid" ? installment.paid_at ?? new Date().toISOString() : null,
-        admin_notes: installment.admin_notes?.trim() || null,
-      };
-
-      const isNewInstallment = installment.id.startsWith("new-");
-      const result = isNewInstallment
-        ? await supabase.from("payment_installments").insert(installmentPayload)
-        : await supabase
-            .from("payment_installments")
-            .update(installmentPayload)
-            .eq("id", installment.id)
-            .eq("guest_booking_id", bookingId)
-            .eq("updated_at", installment.updated_at)
-            .select("id")
-            .maybeSingle();
-
-      if (result.error || (!isNewInstallment && !result.data)) {
-        setError(
-          result.error?.code === "23505"
-            ? "This payment schedule would create a duplicate deposit or balance payment. Reload and try again."
-            : result.error?.message ??
-                "A payment changed in another admin session. Reload before saving."
-        );
-        setIsSaving(false);
-        return;
-      }
-    }
-
-    if (installmentIdsPendingDeletion.length > 0) {
-      const { error: deleteError } = await supabase
-        .from("payment_installments")
-        .delete()
-        .eq("guest_booking_id", bookingId)
-        .in("id", installmentIdsPendingDeletion);
-
-      if (deleteError) {
-        setError(deleteError.message);
-        setIsSaving(false);
-        return;
-      }
     }
 
     setInstallmentIdsPendingDeletion([]);
@@ -896,6 +817,7 @@ export default function AdminPayments() {
                           {PORTAL_PACKAGE_TEMPLATES.map((template) => (
                             <SelectItem key={template.package_type} value={template.package_type}>
                               {template.package_name}
+                              {template.package_type.startsWith("early_bird") ? " (sold out)" : ""}
                             </SelectItem>
                           ))}
                         </SelectContent>

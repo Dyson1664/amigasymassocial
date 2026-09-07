@@ -1,0 +1,4 @@
+project_id = "y-social"
+
+[db]
+major_version = 17
