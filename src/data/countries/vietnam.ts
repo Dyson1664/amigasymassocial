@@ -41,9 +41,10 @@ export const vietnamData = {
   location: "Vietnam",
   duration: "8 days",
   price: "$1,950",
-  priceNote: "Early bird sold out",
-  mobilePriceNote: "Early bird sold out",
-  ctaLabel: "Reserve Now $400",
+  priceNote: "Trip sold out",
+  mobilePriceNote: "Trip sold out",
+  ctaLabel: "Sold Out – Join Waitlist",
+  soldOut: true,
   startDate: "February 25th, 2027",
   heroImage: vietnamHero,
   mobileHeroImage: haLongBay2,
@@ -288,7 +289,7 @@ export const vietnamData = {
     },
   ],
   paymentPlanDescription:
-    "Secure your place with a $400 non-refundable deposit, with the remaining balance paid in two installments. The sold-out early-bird plan remains below for reference.",
+    "This trip is sold out. The payment plans below, including the non-refundable deposit details, remain available for booked guests to reference.",
   paymentPlans: [
     {
       title: "Early Bird Price — Sold Out",
@@ -302,7 +303,7 @@ export const vietnamData = {
       note: "Single room: add the $465 supplement to payment 1, making that payment $1,190 and the trip total $2,265.",
     },
     {
-      title: "Regular Price",
+      title: "Regular Price — Sold Out",
       price: "$1,950",
       payments: [
         { label: "Deposit at booking", amount: "$400" },

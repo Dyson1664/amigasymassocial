@@ -18,6 +18,7 @@ import Footer from "@/components/common/Footer";
 import { DayItinerary } from "@/data/types";
 import ResponsiveRoute from "@/components/RouteBar"; // <-- route component
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { WaitlistDialog } from "@/components/WaitlistDialog";
 
 // Book Now Button Component (routes to Shopify payment or internal booking page)
 import { getPayUrlBySlug } from "@/data/payUrls";
@@ -1291,7 +1292,7 @@ const FAQSection = memo(
   ),
 );
 
-const StickyBookingCard = memo(({ data }: { data: CountryData }) => {
+const StickyBookingCard = memo(({ data, onJoinWaitlist }: { data: CountryData; onJoinWaitlist: () => void }) => {
   const bookingUrl = getBookingUrlBySlug(data.slug);
 
   return (
@@ -1321,10 +1322,7 @@ const StickyBookingCard = memo(({ data }: { data: CountryData }) => {
                   </div>
                 </div>
                 <p className="mt-1 text-sm leading-5 text-slate-600">
-                  <span className="block font-semibold text-[#0fc2bf]">
-                    Join the waitlist
-                  </span>
-                  Email <span className="font-semibold text-[#0b8f8d]">bookings@imaginebeyondtravel.com</span>
+                  This trip is fully booked. Join the waitlist to hear if a place becomes available.
                 </p>
               </div>
             ) : (
@@ -1351,7 +1349,20 @@ const StickyBookingCard = memo(({ data }: { data: CountryData }) => {
             )}
           </div>
 
-          {data.soldOut ? null : bookingUrl === "#" ? (
+          {data.soldOut ? (
+            <div className="space-y-1">
+              <Button
+                size="default"
+                className="w-full rounded-xl bg-primary text-base font-semibold text-primary-foreground hover:bg-primary/90"
+                onClick={onJoinWaitlist}
+              >
+                Sold Out – Join Waitlist
+              </Button>
+              <p className="text-center text-xs font-medium text-muted-foreground">
+                Deposit is non-refundable
+              </p>
+            </div>
+          ) : bookingUrl === "#" ? (
             <Button
               size="default"
               className="h-auto w-full rounded-2xl border border-cyan-200/80 bg-gradient-to-r from-cyan-50 via-white to-teal-50 px-4 py-3 text-slate-700 shadow-[0_18px_40px_-24px_rgba(15,194,191,0.45)] cursor-not-allowed disabled:opacity-100"
@@ -1387,6 +1398,8 @@ const StickyBookingCard = memo(({ data }: { data: CountryData }) => {
 
 export const ItineraryTemplate = memo(
   ({ data, logoStyle, FooterComponent, desktopHero, hideDesktopHero }: ItineraryTemplateProps) => {
+    const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+
     // Memoize derived values
     const countryName = useMemo(() => {
       // Special case for Sri Lanka to keep both words
@@ -1602,7 +1615,9 @@ export const ItineraryTemplate = memo(
               {/* Price in top right corner */}
               <div className="absolute top-6 right-6 z-10">
                 <div className="bg-primary backdrop-blur-md border border-primary rounded-lg px-4 py-2">
-                  <p className="text-xs text-white/90">From</p>
+                  <p className="text-xs font-semibold text-white/90">
+                    {data.soldOut ? "SOLD OUT" : "From"}
+                  </p>
                   {data.priceOriginal ? (
                     <div className="flex items-baseline gap-2">
                       <span className="text-sm text-white/80 line-through">
@@ -1744,34 +1759,18 @@ export const ItineraryTemplate = memo(
             </div>
 
             {/* Sticky Booking Card */}
-            <StickyBookingCard data={data} countryName={countryName} />
+            <StickyBookingCard data={data} onJoinWaitlist={() => setIsWaitlistOpen(true)} />
           </div>
         </div>
 
 {/* Mobile Sticky Booking Bar */}
 <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 px-4 py-1 shadow-lg">
   <div className="flex items-center justify-between gap-4">
-    <div className={`${data.soldOut ? "w-full" : ""} flex flex-col leading-tight space-y-0.5`}>
+    <div className={`${data.soldOut ? "min-w-0 flex-1" : ""} flex flex-col leading-tight space-y-0.5`}>
       {data.soldOut ? (
-        <div className="rounded-2xl border border-cyan-200/80 bg-gradient-to-r from-cyan-50 via-white to-teal-50 px-4 py-2 shadow-[0_18px_40px_-24px_rgba(15,194,191,0.45)]">
-          <div className="flex items-start justify-between gap-3">
-            <span className="text-[13px] font-bold leading-4 text-slate-800">
-              Sold Out
-            </span>
-            <div className="text-right">
-              <span className="block text-[10px] text-slate-600">From</span>
-              <p className="text-sm font-bold text-slate-900">
-                {data.price || "USD $1,399"}
-              </p>
-            </div>
-          </div>
-          <p className="-mt-0.5 text-[11px] leading-4 text-slate-600">
-            <span className="block text-[10px] font-semibold leading-3 text-[#0fc2bf]">
-              Join the waitlist
-            </span>
-            Email <span className="font-semibold text-[#0b8f8d]">bookings@imaginebeyondtravel.com</span>
-          </p>
-        </div>
+        <span className="text-xl font-bold text-foreground">
+          {data.price || "USD $1,399"}
+        </span>
       ) : (
         <>
           <span className="text-sm text-muted-foreground">From</span>
@@ -1800,7 +1799,20 @@ export const ItineraryTemplate = memo(
       const bookingUrl = getBookingUrlBySlug(data.slug);
 
       if (data.soldOut) {
-        return null;
+        return (
+          <button
+            type="button"
+            onClick={() => setIsWaitlistOpen(true)}
+            className="flex w-[56%] flex-shrink-0 flex-col items-center gap-0.5"
+          >
+            <span className="flex h-9 w-full items-center justify-center rounded-full bg-primary px-3 text-center text-[11px] font-semibold tracking-[0.04em] text-primary-foreground transition-colors hover:bg-primary/90">
+              SOLD OUT – JOIN WAITLIST
+            </span>
+            <span className="text-[10px] font-medium leading-none text-muted-foreground">
+              Deposit is non-refundable
+            </span>
+          </button>
+        );
       }
 
       if (bookingUrl === "#") {
@@ -1834,6 +1846,11 @@ export const ItineraryTemplate = memo(
   </div>
 </div>
 
+        <WaitlistDialog
+          open={isWaitlistOpen}
+          onOpenChange={setIsWaitlistOpen}
+          tripName={`${data.desktopTitleKicker ? `${data.desktopTitleKicker} ` : ""}${data.title}`}
+        />
 
 
         {/* Footer */}

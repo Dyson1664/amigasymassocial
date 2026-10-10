@@ -51,6 +51,7 @@ const BOOKING_CONFIG: Record<
     variantId?: string;
     requiresPassport: boolean;
     shopifyDomain: string;
+    soldOut?: boolean;
   }
 > = {
   vietnam: {
@@ -59,6 +60,7 @@ const BOOKING_CONFIG: Record<
     variantId: "45873122476211",
     requiresPassport: false,
     shopifyDomain: "tbff.imaginebeyondtravel.com",
+    soldOut: true,
   },
 };
 
@@ -266,6 +268,26 @@ export default function BookingPage2() {
             </p>
             <Button onClick={() => navigate("/")} className="w-full">
               Go to homepage
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (config.soldOut) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="px-4 pb-16 pt-24">
+          <div className="mx-auto max-w-xl rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+            <h1 className="mb-2 text-2xl font-bold text-primary">This trip is sold out</h1>
+            <p className="mb-6 text-muted-foreground">
+              Please return to the trip page to join the waitlist.
+            </p>
+            <Button onClick={() => navigate("/")} className="w-full">
+              View trip and join waitlist
             </Button>
           </div>
         </main>

@@ -108,6 +108,14 @@ type BookingFormState = {
   booking_status: string;
 };
 
+type WaitlistSignup = {
+  id: string;
+  full_name: string;
+  email: string;
+  mobile: string;
+  created_at: string;
+};
+
 const initialPackageTemplate =
   getPortalPackageTemplate("standard") ?? PORTAL_PACKAGE_TEMPLATES[0];
 
@@ -140,6 +148,18 @@ const formatDueDate = (value?: string | null) => {
     month: "short",
     day: "numeric",
     year: "numeric",
+  }).format(date);
+};
+
+const formatWaitlistDate = (value?: string | null) => {
+  if (!value) return "";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
   }).format(date);
 };
 
@@ -199,6 +219,8 @@ export default function AdminPayments() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [bookings, setBookings] = useState<BookingWithInstallments[]>([]);
+  const [waitlistSignups, setWaitlistSignups] = useState<WaitlistSignup[]>([]);
+  const [waitlistError, setWaitlistError] = useState("");
   const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
   const [selectedInstallmentId, setSelectedInstallmentId] = useState<string | null>(null);
   const [bookingForm, setBookingForm] = useState<BookingFormState>(emptyBookingForm);
@@ -237,6 +259,28 @@ export default function AdminPayments() {
     setBookings((data ?? []) as BookingWithInstallments[]);
   };
 
+  const loadWaitlist = async () => {
+    if (!supabase) return;
+
+    const { data, error: queryError } = await supabase
+      .from("waitlist_signups")
+      .select("id, full_name, email, mobile, created_at")
+      .eq("trip_slug", PORTAL_TRIP_SLUG)
+      .order("created_at", { ascending: false });
+
+    if (queryError) {
+      setWaitlistError(
+        queryError.code === "42P01"
+          ? "Waitlist entries will appear once the waitlist database migration is applied."
+          : queryError.message
+      );
+      return;
+    }
+
+    setWaitlistError("");
+    setWaitlistSignups((data ?? []) as WaitlistSignup[]);
+  };
+
   useEffect(() => {
     const checkAdmin = async () => {
       if (!isSupabaseConfigured || !supabase) {
@@ -262,7 +306,7 @@ export default function AdminPayments() {
       }
 
       setIsAdmin(true);
-      await loadBookings();
+      await Promise.all([loadBookings(), loadWaitlist()]);
       setIsLoading(false);
     };
 
@@ -670,6 +714,54 @@ export default function AdminPayments() {
                     <p className="mt-2 text-2xl font-bold text-foreground">{summaryCounts[status] ?? 0}</p>
                   </div>
                 ))}
+              </section>
+
+              <section className="mb-6 rounded-xl border bg-card p-4 shadow-sm">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h2 className="text-lg font-semibold text-foreground">Waitlist</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {waitlistSignups.length} {waitlistSignups.length === 1 ? "person" : "people"} joined the waitlist.
+                    </p>
+                  </div>
+                  <Button type="button" variant="outline" onClick={loadWaitlist}>
+                    Refresh waitlist
+                  </Button>
+                </div>
+
+                {waitlistError ? (
+                  <p className="mt-4 rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+                    {waitlistError}
+                  </p>
+                ) : (
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[620px] text-left text-sm">
+                      <thead className="border-b text-xs uppercase tracking-wide text-muted-foreground">
+                        <tr>
+                          <th className="px-3 py-2 font-medium">Name</th>
+                          <th className="px-3 py-2 font-medium">Email</th>
+                          <th className="px-3 py-2 font-medium">Mobile</th>
+                          <th className="px-3 py-2 font-medium">Joined</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {waitlistSignups.map((signup) => (
+                          <tr key={signup.id} className="border-b last:border-0">
+                            <td className="px-3 py-3 font-medium text-foreground">{signup.full_name}</td>
+                            <td className="px-3 py-3 text-muted-foreground">{signup.email}</td>
+                            <td className="px-3 py-3 text-muted-foreground">{signup.mobile}</td>
+                            <td className="px-3 py-3 text-muted-foreground">
+                              {formatWaitlistDate(signup.created_at)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {waitlistSignups.length === 0 && (
+                      <p className="px-3 py-6 text-sm text-muted-foreground">No one has joined the waitlist yet.</p>
+                    )}
+                  </div>
+                )}
               </section>
 
               <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">

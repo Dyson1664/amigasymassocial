@@ -64,6 +64,12 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/55f765f5-bef4-4be9-88d6-60c91d2d3a8b) and click on Share -> Publish.
 
+### Waitlist setup
+
+The sold-out trip waitlist saves names, email addresses, mobile numbers, and sign-up times in the private `waitlist_signups` table. Administrators can view entries from `/admin/payments`.
+
+Apply `supabase/migrations/20261010000000_add_amigas_waitlist.sql` to the connected Supabase project before deploying the website. The table grants public visitors permission to insert a sign-up only. Entries can be read only by signed-in administrators with access to this trip.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
