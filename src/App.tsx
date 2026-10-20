@@ -14,6 +14,7 @@ import AdminPayments from "./pages/admin/AdminPayments";
 import AuthCallback from "./pages/portal/AuthCallback";
 import GuestDashboard from "./pages/portal/GuestDashboard";
 import GuestLogin from "./pages/portal/GuestLogin";
+import TravellerDetailsPreview from "./pages/portal/TravellerDetailsPreview";
 import VietnamItinerary from "./pages/VietnamItinerary";
 
 import BookingPage from "./pages/booking/BookingPage";
@@ -37,6 +38,9 @@ const App = () => (
           <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/portal/dashboard" element={<GuestDashboard />} />
           <Route path="/admin/payments" element={<AdminPayments />} />
+          {(import.meta.env.DEV || import.meta.env.VITE_PASSPORT_PREVIEW === "true") && (
+            <Route path="/preview/traveller-details" element={<TravellerDetailsPreview />} />
+          )}
 
           <Route path="/" element={<VietnamItinerary />} />
           <Route path="/vietnam-itinerary" element={<VietnamItinerary />} />

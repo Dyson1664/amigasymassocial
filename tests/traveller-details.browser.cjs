@@ -93,23 +93,23 @@ async function main() {
       }));
     });
     await page.goto("http://127.0.0.1:5187/portal/dashboard");
-    await page.getByLabel("Given name(s) on passport").first().waitFor();
-    assert.equal(await page.getByLabel("Given name(s) on passport").count(), 2);
-    const saveButton = page.getByRole("button", { name: "Save traveller details" });
+    await page.getByLabel("Given Names (First + Middle)").first().waitFor();
+    assert.equal(await page.getByLabel("Given Names (First + Middle)").count(), 2);
+    const saveButton = page.getByRole("button", { name: "Save my details" });
     assert.equal(await saveButton.isDisabled(), true);
     for (let i = 0; i < 2; i++) {
       await page.locator(`#given-names-${i}`).fill(i ? "María Anne" : "Test Middle");
       await page.locator(`#surname-${i}`).fill(i ? "O'Neill-Santos" : "Guest");
       await page.locator(`#dob-${i}`).fill("1992-02-29");
     }
-    const checkbox = page.getByRole("checkbox", { name: /I have checked/ });
+    const checkbox = page.getByRole("checkbox", { name: /I confirm that my/ });
     await checkbox.check();
     await page.locator("#given-names-0").fill("Corrected Middle");
     assert.equal(await checkbox.isChecked(), false);
     assert.equal(await saveButton.isDisabled(), true);
     await checkbox.check();
     await saveButton.click();
-    await page.getByRole("status").filter({ hasText: "Traveller details saved and confirmed" }).waitFor();
+    await page.getByRole("status").filter({ hasText: "Your passport details are saved and confirmed" }).waitFor();
     assert.equal(saves, 1);
     assert.equal(details[0].given_names, "Corrected Middle");
     assert.equal(await checkbox.isChecked(), false);
@@ -125,10 +125,10 @@ async function main() {
     assert.equal(saves, 1);
     failSave = false;
     await saveButton.click();
-    await page.getByRole("status").filter({ hasText: "Traveller details saved and confirmed" }).waitFor();
+    await page.getByRole("status").filter({ hasText: "Your passport details are saved and confirmed" }).waitFor();
     assert.equal(saves, 2);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
-    await page.getByRole("heading", { name: "Traveller details", exact: true }).scrollIntoViewIfNeeded();
+    await page.getByRole("heading", { name: "Your passport details", exact: true }).scrollIntoViewIfNeeded();
     await page.screenshot({ path: path.join(os.tmpdir(), "amigas-traveller-mobile.png") });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("http://127.0.0.1:5187/admin/payments");

@@ -1,7 +1,7 @@
 export const TRAVELLER_DETAILS_TRIP = "vietnam-amigas-y-mas-social";
 export const TRAVELLER_DETAILS_TABLE = "amigas_traveller_details";
 export const PASSPORT_CONFIRMATION =
-  "I have checked each traveller's passport and confirm that the given name(s), surname and date of birth entered here match it exactly. I understand these details will be used for flight and travel bookings.";
+  "I confirm that my given names, surname and date of birth match my passport exactly. I understand these details will be used to book my domestic flight in Vietnam.";
 
 export type TravellerInput = {
   given_names: string;
