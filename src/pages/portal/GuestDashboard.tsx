@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/common/Footer";
 import { Button } from "@/components/ui/button";
+import TravellerDetailsForm from "@/components/portal/TravellerDetailsForm";
+import { TRAVELLER_DETAILS_TRIP } from "@/lib/travellerDetails";
 import {
   getPortalPackageTemplate,
   type PaymentStatus,
@@ -396,6 +398,14 @@ export default function GuestDashboard() {
                 </dl>
               </div>
             </section>
+
+            {booking.trip_slug === TRAVELLER_DETAILS_TRIP && (
+              <TravellerDetailsForm
+                key={booking.id}
+                bookingId={booking.id}
+                guestCount={Math.max(1, booking.guest_count ?? 1)}
+              />
+            )}
 
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-sm leading-6 text-foreground">
               {paymentNotice}

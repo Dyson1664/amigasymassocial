@@ -70,6 +70,29 @@ The sold-out trip waitlist saves names, email addresses, mobile numbers, and sig
 
 Apply `supabase/migrations/20261010000000_add_amigas_waitlist.sql` to the connected Supabase project before deploying the website. The table grants public visitors permission to insert a sign-up only. Entries can be read only by signed-in administrators with access to this trip.
 
+### Amigas Vietnam traveller details
+
+The guest dashboard collects passport given names, surname, and date of birth for
+each traveller on an Amigas Vietnam booking. Guests must confirm the details match
+their passports before saving. Editing any field clears the confirmation checkbox.
+Admins can view confirmation times, filter missing submissions, and download CSV
+from the Traveller details section of `/admin/payments`. No email is sent.
+
+Apply `supabase/migrations/20261020130000_add_amigas_traveller_details.sql` before
+deploying. It adds only the `amigas_traveller_details` table, its policies and new
+functions. Existing booking/payment tables and policies are not modified. Guest
+writes are restricted to the booking email and the
+`vietnam-amigas-y-mas-social` trip. Authorized trip admins have read access.
+The save function uses invoker permissions and saves the whole traveller list
+atomically. The database enforces confirmation and stamps its time.
+
+Run `node --test tests/traveller-details.test.cjs` for validation/export tests.
+`supabase/tests/amigas_traveller_details.sql` checks access using existing bookings
+inside a transaction that rolls back all test details.
+The optional browser suite is `node tests/traveller-details.browser.cjs`; it
+requires Playwright with Chromium (or pass an installed Playwright package path).
+It builds with test-only environment values and mocks every API call.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

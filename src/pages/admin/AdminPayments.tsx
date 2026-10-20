@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/common/Footer";
+import AdminTravellerDetails from "@/components/portal/AdminTravellerDetails";
+import { TRAVELLER_DETAILS_TRIP } from "@/lib/travellerDetails";
 import { PAYMENT_STATUS_LABELS, paymentStatusLabel } from "@/components/portal/PaymentStatusBadge";
 import {
   AlertDialog,
@@ -715,6 +717,10 @@ export default function AdminPayments() {
                   </div>
                 ))}
               </section>
+
+              {PORTAL_TRIP_SLUG === TRAVELLER_DETAILS_TRIP && (
+                <AdminTravellerDetails bookings={bookings} />
+              )}
 
               <section className="mb-6 rounded-xl border bg-card p-4 shadow-sm">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
